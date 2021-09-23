@@ -2,7 +2,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.function.Executable;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -19,11 +19,11 @@ public class YandexTest {
     public void setUp() {
         driver = new ChromeDriver();
         driver.manage().window().maximize();
-        wait = new WebDriverWait(driver,30);
+        wait = new WebDriverWait(driver, 30);
     }
 
     @Test
-    public void loginTest(){
+    public void loginTest() {
         driver.get("https://mail.yandex.com/");
 
         Assertions.assertTrue(driver.getTitle().contains(ResourcesProperties.getDataProperty("startPageTitle")), "It's wrong page");
