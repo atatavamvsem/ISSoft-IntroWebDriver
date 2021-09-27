@@ -1,5 +1,6 @@
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.Objects;
 import java.util.Properties;
 
 public class ResourcesProperties {
@@ -19,7 +20,7 @@ public class ResourcesProperties {
         } catch (IOException e) {
             throw new UnsupportedOperationException(e);
         } finally {
-            if (fileConfigInputStream != null && fileTestDataInputStream != null)
+            if (Objects.nonNull(fileConfigInputStream) && Objects.nonNull(fileTestDataInputStream))
                 try {
                     fileConfigInputStream.close();
                     fileTestDataInputStream.close();

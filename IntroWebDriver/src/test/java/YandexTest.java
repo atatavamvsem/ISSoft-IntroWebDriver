@@ -10,6 +10,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.List;
+
 
 public class YandexTest {
     private WebDriver driver;
@@ -26,12 +28,8 @@ public class YandexTest {
     public void loginTest() {
         driver.get("https://mail.yandex.com/");
 
-        Assertions.assertTrue(driver.getTitle().contains(ResourcesProperties.getDataProperty("startPageTitle")), "It's wrong page");
-
         WebElement inputButton = driver.findElement(By.xpath("//a[contains(@class,'HeadBanner-Button-Enter')]"));
         inputButton.click();
-
-        Assertions.assertEquals(ResourcesProperties.getDataProperty("authorizationPageTitle"), driver.getTitle(), "It's wrong page");
 
         WebElement loginInput = driver.findElement(By.xpath("//input[@id='passp-field-login']"));
         loginInput.sendKeys(ResourcesProperties.getCredProperty("login"));
@@ -45,7 +43,8 @@ public class YandexTest {
         WebElement loginSecondButton = driver.findElement(By.xpath("//button[@id='passp:sign-in']"));
         loginSecondButton.click();
 
-        Assertions.assertTrue(wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[@class='PSHeaderLogo360-360']"))).isDisplayed(), "It's wrong page");
+        Assertions.assertEquals(wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[contains(@class,'user-account_left-name')]/span[@class='user-account__name']"))).getText(),
+                ResourcesProperties.getCredProperty("login"),"Login failed");
     }
 
     @AfterEach
